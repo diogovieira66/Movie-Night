@@ -84,7 +84,7 @@ export const Oracle: React.FC<OracleProps> = ({ data }) => {
                 onClick={() => { setMode('PROFILE'); setResult(null); }}
                 className={`px-6 py-2 rounded-md text-sm uppercase tracking-wider transition-all ${mode === 'PROFILE' ? 'bg-tbhc-gold text-tbhc-bg font-bold' : 'text-tbhc-cream/50 hover:text-tbhc-cream'}`}
               >
-                Taste Profile
+                Personal Picks
               </button>
               <button 
                 onClick={() => { setMode('RECOMMEND'); setResult(null); }}
@@ -101,7 +101,7 @@ export const Oracle: React.FC<OracleProps> = ({ data }) => {
 
           {mode === 'PROFILE' && (
              <div className="relative z-10 space-y-6">
-                <p className="text-center text-tbhc-cream/60 font-serif italic">Select a subject for psychographic analysis.</p>
+                <p className="text-center text-tbhc-cream/60 font-serif italic">Select a member for personalized recommendations.</p>
                 <div className="flex gap-2">
                     <select 
                       value={selectedParticipant}
@@ -143,23 +143,18 @@ export const Oracle: React.FC<OracleProps> = ({ data }) => {
                       <span className="text-xs font-mono text-tbhc-gold animate-pulse">PROCESSING DATA STREAMS...</span>
                   </div>
               ) : result ? (
-                  mode === 'PROFILE' ? (
-                      <div className="font-mono text-tbhc-cream text-sm leading-relaxed whitespace-pre-wrap animate-fade-in">
-                          {typeof result === 'string' ? result : JSON.stringify(result)}
-                      </div>
-                  ) : (
-                      <div className="grid gap-6 animate-fade-in">
-                          {(result as any[]).map((rec, idx) => (
-                              <div key={idx} className="bg-white/5 p-4 rounded border-l-2 border-tbhc-gold">
-                                  <div className="flex justify-between items-baseline mb-2">
-                                      <h4 className="text-lg font-serif text-tbhc-gold">{rec.title}</h4>
-                                      <span className="text-xs font-mono text-tbhc-cream/40">{rec.year}</span>
-                                  </div>
-                                  <p className="text-sm text-tbhc-cream/80 leading-relaxed">"{rec.pitch}"</p>
+                  <div className="grid gap-6 animate-fade-in">
+                      {(result as any[]).map((rec, idx) => (
+                          <div key={idx} className="bg-white/5 p-4 rounded border-l-2 border-tbhc-gold">
+                              <div className="flex justify-between items-baseline mb-2">
+                                  <h4 className="text-lg font-serif text-tbhc-gold">{rec.title}</h4>
+                                  <span className="text-xs font-mono text-tbhc-cream/40">{rec.year}</span>
                               </div>
-                          ))}
-                      </div>
-                  )
+                              <p className="text-sm text-tbhc-cream/80 leading-relaxed">"{rec.pitch}"</p>
+                          </div>
+                      ))}
+                  </div>
+                  
               ) : (
                   <div className="text-center text-tbhc-cream/20 font-mono text-xs py-8">
                       AWAITING INPUT...
