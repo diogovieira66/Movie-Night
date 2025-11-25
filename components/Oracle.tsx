@@ -103,14 +103,21 @@ export const Oracle: React.FC<OracleProps> = ({ data }) => {
              <div className="relative z-10 space-y-6">
                 <p className="text-center text-tbhc-cream/60 font-serif italic">Select a member for personalized recommendations.</p>
                 <div className="flex gap-2">
-                    <select 
-                      value={selectedParticipant}
-                      onChange={(e) => setSelectedParticipant(e.target.value)}
-                      className="flex-1 bg-black/30 border border-white/10 rounded px-4 py-3 text-tbhc-cream focus:border-tbhc-gold outline-none"
-                    >
-                        <option value="">Select Participant...</option>
-                        {data.participants.map(p => <option key={p.id} value={p.id}>{p.name}</option>)}
-                    </select>
+                    <div className="flex-1 relative">
+                        <select 
+                          value={selectedParticipant}
+                          onChange={(e) => setSelectedParticipant(e.target.value)}
+                          className="w-full bg-black/30 border border-white/10 rounded px-4 py-3 pr-10 text-tbhc-cream focus:border-tbhc-gold outline-none appearance-none cursor-pointer"
+                          style={{
+                            backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23cba163' d='M6 9L1 4h10z'/%3E%3C/svg%3E")`,
+                            backgroundRepeat: 'no-repeat',
+                            backgroundPosition: 'right 1rem center'
+                          }}
+                        >
+                            <option value="">Select Participant...</option>
+                            {data.participants.map(p => <option key={p.id} value={p.id}>{p.name}</option>)}
+                        </select>
+                    </div>
                     <button 
                       onClick={handleProfileAnalysis}
                       disabled={!selectedParticipant || loading}
