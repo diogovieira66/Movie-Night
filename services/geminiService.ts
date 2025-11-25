@@ -3,7 +3,7 @@ import { GoogleGenAI } from "@google/genai";
 const TMDB_API_KEY = 'd9140d4687d6e98b8b0dc409b730449f';
 
 export const fetchMovieMetadata = async (query: string, year?: string, directorHint?: string): Promise<Partial<any>> => {
-  const apiKey = process.env.API_KEY;
+  const apiKey = import.meta.env.VITE_GOOGLE_API_KEY;
   
   try {
     let candidates: any[] = [];
@@ -167,7 +167,7 @@ export const fetchMovieMetadata = async (query: string, year?: string, directorH
 };
 
 export const generateTasteProfile = async (participantName: string, ratings: {title: string, score: number}[]) => {
-  const apiKey = process.env.API_KEY;
+  const apiKey = import.meta.env.VITE_GOOGLE_API_KEY;
   if (!apiKey) throw new Error("API Key missing");
   const ai = new GoogleGenAI({ apiKey });
   
@@ -198,7 +198,7 @@ export const generateTasteProfile = async (participantName: string, ratings: {ti
 };
 
 export const generateGroupRecommendations = async (movies: {title: string, avgScore: number, genres?: string[]}[]) => {
-  const apiKey = process.env.API_KEY;
+  const apiKey = import.meta.env.VITE_GOOGLE_API_KEY;
   if (!apiKey) throw new Error("API Key missing");
   const ai = new GoogleGenAI({ apiKey });
   
