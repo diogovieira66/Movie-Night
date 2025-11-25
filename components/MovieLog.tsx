@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { AppData, Movie } from '../types';
 
@@ -114,7 +113,7 @@ export const MovieLog: React.FC<MovieLogProps> = ({ data, onEditMovie, onDeleteM
                         {movie.officialRating && (
                             <>
                             <span className="hidden sm:inline">•</span>
-                            <span className="text-tbhc-gold/80 border border-tbhc-gold/30 px-1.5 rounded-sm whitespace-nowrap">{movie.officialRating} <span className="opacity-50 text-[10px] ml-0.5">IMDb</span></span>
+                            <span className="bg-tbhc-rust text-white border border-tbhc-rust px-2 py-0.5 rounded-sm whitespace-nowrap font-medium">{movie.officialRating} <span className="opacity-70 text-[10px] ml-0.5">IMDb</span></span>
                             </>
                         )}
                         </div>
