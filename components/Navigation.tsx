@@ -17,7 +17,7 @@ export const Navigation: React.FC<NavigationProps> = ({ currentView, setView, to
     { id: ViewState.LOG, label: 'Cinema Log' },
     { id: ViewState.STATS, label: 'Data Analytics' },
     { id: ViewState.ORACLE, label: 'The Oracle' },
-    { id: ViewState.SETTINGS, label: 'Maanagement' },
+    { id: ViewState.SETTINGS, label: 'Management' },
   ];
 
   const handleNavClick = (view: ViewState) => {
