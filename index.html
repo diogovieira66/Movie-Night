@@ -1,0 +1,107 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Star Treatment Cinema Tracker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        /* Default Dark Mode (Tranquility Base) */
+        --tbhc-bg: #1c1c1e;
+        --tbhc-card: #252528;
+        --tbhc-gold: #cba163;
+        --tbhc-cream: #e3e3dd;
+        --tbhc-rust: #b95c34;
+        --tbhc-taupe: #8c7b75;
+        --tbhc-accent: #d97706;
+      }
+
+      .theme-light {
+        /* Light Mode (Lobby Card) */
+        --tbhc-bg: #f5f5f0;
+        --tbhc-card: #ffffff;
+        --tbhc-gold: #b08d55; /* Darker gold for light bg */
+        --tbhc-cream: #1c1c1e; /* Dark text */
+        --tbhc-rust: #c0562e;
+        --tbhc-taupe: #8c7b75;
+        --tbhc-accent: #d97706;
+      }
+
+      body {
+        background-color: var(--tbhc-bg);
+        color: var(--tbhc-cream);
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--tbhc-bg);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--tbhc-gold);
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--tbhc-accent);
+      }
+    </style>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              tbhc: {
+                bg: 'var(--tbhc-bg)',
+                card: 'var(--tbhc-card)',
+                gold: 'var(--tbhc-gold)',
+                cream: 'var(--tbhc-cream)',
+                rust: 'var(--tbhc-rust)',
+                taupe: 'var(--tbhc-taupe)',
+                accent: 'var(--tbhc-accent)',
+                wood: '#5d4037',
+              }
+            },
+            fontFamily: {
+              serif: ['"Playfair Display"', 'serif'],
+              sans: ['"Inter"', 'sans-serif'],
+            },
+            animation: {
+              'fade-in': 'fadeIn 0.5s ease-out',
+            },
+            keyframes: {
+              fadeIn: {
+                '0%': { opacity: '0', transform: 'translateY(10px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
+              }
+            }
+          }
+        }
+      }
+    </script>
+  <script type="importmap">
+{
+  "imports": {
+    "recharts": "https://aistudiocdn.com/recharts@^3.4.1",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "@vitejs/plugin-react": "https://aistudiocdn.com/@vitejs/plugin-react@^5.1.1",
+    "vite": "https://aistudiocdn.com/vite@^7.2.4",
+    "path": "https://aistudiocdn.com/path@^0.12.7"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>

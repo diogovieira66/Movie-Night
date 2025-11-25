@@ -1,0 +1,5 @@
+{
+  "name": "Star Treatment Cinema Tracker",
+  "description": "A retro-futuristic movie tracking application for 'movie nights with the boys', featuring automatic metadata fetching powered by Gemini and a Tranquility Base Hotel & Casino aesthetic.",
+  "requestFramePermissions": []
+}
