@@ -252,7 +252,7 @@ export const AddMovieModal: React.FC<AddMovieModalProps> = ({ isOpen, onClose, o
                    
                    {fetchedData.officialRating && (
                       <div className="inline-block px-2 py-1 bg-white/5 border border-white/10 rounded text-tbhc-gold text-xs font-mono">
-                        {fetchedData.officialRating} <span className="text-tbhc-gold/80 border border-tbhc-gold/30 px-1.5 rounded-sm whitespace-nowrap">IMDb</span>
+                        {fetchedData.officialRating} <span className="opacity-50 text-[10px] ml-1">IMDb</span>
                       </div>
                    )}
                    
