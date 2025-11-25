@@ -203,6 +203,41 @@ export const generateTasteProfile = async (participantName: string, ratings: {ti
   return response.text;
 };
 
+export const generatePersonalRecommendations = async (participantName: string, ratings: {title: string, score: number, genres?: string[]}[]) => {
+    const apiKey = import.meta.env.VITE_GOOGLE_API_KEY;
+    if (!apiKey) throw new Error("API Key missing");
+    const ai = new GoogleGenAI({ apiKey });
+    
+    // Filter for high rated movies
+    const highRated = ratings
+      .filter(r => r.score >= 3.5)
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 10)
+      .map(r => r.title);
+
+    const prompt = `
+      Act as a Cinema Curator AI for an individual viewer.
+      ${participantName} has watched and highly rated these movies: ${highRated.join(', ')}.
+      
+      Recommend 3 DISTINCT movies ${participantName} should watch next based on their personal taste.
+      They should not be movies already in the list.
+      
+      For each recommendation provide:
+      1. Title & Year
+      2. A one-sentence "Pitch" explaining why it fits ${participantName}'s specific taste.
+      
+      Format the output as a JSON list of objects with keys: "title", "year", "pitch".
+    `;
+    
+    const response = await ai.models.generateContent({
+      model: "gemini-2.5-flash",
+      contents: prompt,
+      config: { responseMimeType: 'application/json' }
+    });
+    
+    return JSON.parse(response.text || "[]");
+  };
+
 export const generateGroupRecommendations = async (movies: {title: string, avgScore: number, genres?: string[]}[]) => {
   const apiKey = import.meta.env.VITE_GOOGLE_API_KEY;
   if (!apiKey) throw new Error("API Key missing");

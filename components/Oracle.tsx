@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { AppData, Participant } from '../types';
-import { generateTasteProfile, generateGroupRecommendations } from '../services/geminiService';
+import { generateTasteProfile, generateGroupRecommendations, generatePersonalRecommendations } from '../services/geminiService';
 
 interface OracleProps {
   data: AppData;
@@ -15,32 +15,32 @@ export const Oracle: React.FC<OracleProps> = ({ data }) => {
   const [result, setResult] = useState<any>(null);
 
   const handleProfileAnalysis = async () => {
-    if (!selectedParticipant) return;
-    setLoading(true);
-    setResult(null);
-    
-    try {
-      const p = data.participants.find(part => part.id === selectedParticipant);
-      if (!p) return;
+      if (!selectedParticipant) return;
+      setLoading(true);
+      setResult(null);
+      
+      try {
+        const p = data.participants.find(part => part.id === selectedParticipant);
+        if (!p) return;
 
-      const userRatings = data.movies.map(m => {
-        const r = m.ratings.find(rat => rat.userId === p.id);
-        return r ? { title: m.title, score: r.score } : null;
-      }).filter(item => item !== null) as {title: string, score: number}[];
+        const userRatings = data.movies.map(m => {
+          const r = m.ratings.find(rat => rat.userId === p.id);
+          return r ? { title: m.title, score: r.score, genres: m.genres } : null;
+        }).filter(item => item !== null) as {title: string, score: number, genres?: string[]}[];
 
-      if (userRatings.length < 3) {
-        setResult("Insufficient data. This subject requires more observation (min 3 ratings).");
-        setLoading(false);
-        return;
+        if (userRatings.length < 3) {
+          setResult([{ title: "Insufficient Data", year: "N/A", pitch: "This subject requires more observation (min 3 ratings)."}]);
+          setLoading(false);
+          return;
+        }
+
+        const recommendations = await generatePersonalRecommendations(p.name, userRatings);
+        setResult(recommendations);
+      } catch (e) {
+        setResult([{ title: "Error", year: "N/A", pitch: "Error communicating with the mainframe."}]);
+        console.error(e);
       }
-
-      const analysis = await generateTasteProfile(p.name, userRatings);
-      setResult(analysis);
-    } catch (e) {
-      setResult("Error communicating with the mainframe.");
-      console.error(e);
-    }
-    setLoading(false);
+      setLoading(false);
   };
 
   const handleRecommendations = async () => {
