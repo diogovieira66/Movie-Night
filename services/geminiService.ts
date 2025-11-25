@@ -1,9 +1,15 @@
 import { GoogleGenAI } from "@google/genai";
 
-const TMDB_API_KEY = 'd9140d4687d6e98b8b0dc409b730449f';
+// Get TMDB API key from environment variable instead of hardcoding
+const TMDB_API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
 export const fetchMovieMetadata = async (query: string, year?: string, directorHint?: string): Promise<Partial<any>> => {
   const apiKey = import.meta.env.VITE_GOOGLE_API_KEY;
+  
+  if (!TMDB_API_KEY) {
+    console.error("TMDB API key is missing");
+    return { title: query, releaseYear: year, director: directorHint };
+  }
   
   try {
     let candidates: any[] = [];
